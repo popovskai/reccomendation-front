@@ -11,7 +11,7 @@ import { ContentTag } from '../_models/content-tag.model';
 export class ContentService {
 
   httpHeaders: HttpHeaders = new HttpHeaders({
-    'x-rapidapi-key': 'e59a2ebf7emsh1a6593a0e661355p179ea3jsn4d81e51572b1'
+    'key': 'a'
   });
 
   userId: number = 1;
