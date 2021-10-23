@@ -1,0 +1,5 @@
+<h2>New contents: </h2>
+<h3 *ngIf="notifications.length === 0">No new contents!</h3>
+<div class="row" *ngFor="let notification of notifications">
+<a mat-button mat-dialog-close (click)="onClickNotification(notification.id)">{{notification.contentTitle}}</a>
+</div>

@@ -1,0 +1,30 @@
+<div class="card mt-2">
+    <div class="row">
+        <div class="col-4">
+            <img [src]="content.imgSource" class="card-img-top" *ngIf="content.contentTypeName === 'movie' || content.contentTypeName === 'tv-series' "> 
+            <img src="https://blog.coursify.me/wp-content/uploads/2019/06/sell-online-courses-podcast-coursifyme.jpg" class="card-img-top" *ngIf="content.contentTypeName === 'podcast'">
+            <img src="https://ugelcajamarca.gob.pe/wp-content/uploads/sites/3/2020/05/como-hacer-un-webinar-con-e%CC%81xito.png" class="card-img-top" *ngIf="content.contentTypeName === 'webinar'">  
+            <img src="https://vistapointe.net/images/other-wallpaper-11.jpg" class="card-img-top" *ngIf="content.contentTypeName === 'other'">
+        </div>
+    <div class="card-body col-4">
+        <h3 class="card-title">{{content.title}}</h3>
+        <div class="row" style="color:lightseagreen;">
+            <fa-icon [icon]="faStar" style="color: gold;"></fa-icon><h2>{{content.rating}} </h2><h5>/10 from users</h5>
+        </div>
+        <div class="row" style="color:lightseagreen;" *ngIf="content.contentTypeName === 'movie' || content.contentTypeName === 'tv-series' ">
+            <fa-icon [icon]="faStar" style="color: gold;"></fa-icon> <h2>  {{content.externalRating}} </h2><h5>/10 from IMDb</h5>
+        </div>
+        <h4 style="color: #3F51B5;">Who is it for: <span style="color:black;">{{content.whoIsItFor}}</span></h4>
+        <h4 style="color: #3F51B5;">Description: <span style="color:black;">{{content.description}}</span></h4>
+        <a mat-button [href]="content.url">Read more</a>
+    </div>
+    <div class="card-body col-4">
+        <mat-chip-list>
+            <mat-chip color="accent" selected *ngFor="let tag of tags">#{{tag.name}}</mat-chip>
+          </mat-chip-list>
+    </div>
+    </div>
+    <div class="card-footer text-muted">
+       <i><label class="justify-content-center">Posted on: {{content.createdAt}} by {{content.userFullName}}</label></i> 
+    </div>
+</div>

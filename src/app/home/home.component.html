@@ -1,0 +1,146 @@
+<mat-tab-group>
+    <mat-tab label="All contents">
+        <div class="row justify-content-left">
+            <div class="col-3 mt-4 ml-2 mr-3 d-flex justify-content-center">
+                <div class="row">
+                    <button mat-fab color="primary" (click)="onAddNewContent()">
+                        +
+                    </button>
+                    <h3 class="mt-3 ml-3">Post new content</h3>
+                </div>
+            </div>
+        <div class="card col-3 mt-4 ml-2 mr-3" *ngFor="let content of contents">
+            <img [src]="content.imgSource" class="card-img-top" *ngIf="content.contentTypeName === 'movie' || content.contentTypeName === 'tv-series' "> 
+            <img src="https://blog.coursify.me/wp-content/uploads/2019/06/sell-online-courses-podcast-coursifyme.jpg" class="card-img-top" *ngIf="content.contentTypeName === 'podcast'">
+            <img src="https://ugelcajamarca.gob.pe/wp-content/uploads/sites/3/2020/05/como-hacer-un-webinar-con-e%CC%81xito.png" class="card-img-top" *ngIf="content.contentTypeName === 'webinar'">  
+            <img src="https://vistapointe.net/images/other-wallpaper-11.jpg" class="card-img-top" *ngIf="content.contentTypeName === 'other'">
+            <div class="card-body">
+                <h2 class="card-title">{{content.title}}</h2>
+                <div class="row justify-content-end" style="color:lightseagreen;">
+                    <fa-icon [icon]="faStar" style="color: gold;"></fa-icon> <h2>  {{content.rating}} </h2><h5>/10</h5>
+                </div>
+                <h4 style="color: #3F51B5;">Who is it for: <span style="color:black;">{{content.whoIsItFor}}</span></h4>
+                <h4 style="color: #3F51B5;">Description: <span style="color:black;">{{content.description}}</span></h4>
+            </div>
+            <div>
+                <button mat-button color="primary" (click)="openComments(content.id)">Comments</button> |
+                <button mat-button color="primary" (click)="openDialog(content.id)">Details</button>
+            </div>
+            <div class="card-footer text-muted">
+               <i>Posten on: {{content.createdAt}} by {{content.userFullName}}</i> 
+            </div>
+          </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Movies">
+        <div *ngFor="let content of contents">
+            <div class="card col-3 mt-4 ml-3 mr-3" *ngIf="content.contentTypeName === 'movie'">
+                <img [src]="content.imgSource" class="card-img-top">
+                <div class="card-body">
+                    <h3 class="card-title">{{content.title}}</h3>
+                    <div class="row justify-content-end" style="color:lightseagreen;">
+                        <fa-icon [icon]="faStar" style="color: gold;"></fa-icon> <h2>  {{content.rating}} </h2><h5>/10</h5>
+                    </div>
+                    <h4 style="color: #3F51B5;">Who is it for: <span style="color:black;">{{content.whoIsItFor}}</span></h4>
+                    <h4 style="color: #3F51B5;">Description: <span style="color:black;">{{content.description}}</span></h4>
+                </div>
+                <div>
+                    <button mat-button color="primary">Comments</button> |
+                    <button mat-button color="primary" (click)="openDialog(content.id)">Details</button>
+                </div>
+                <div class="card-footer text-muted">
+                   <i>Posten on: {{content.createdAt}}</i> 
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Tv-Series">
+        <div *ngFor="let content of contents">
+            <div class="card col-3 mt-4 ml-3 mr-3" *ngIf="content.contentTypeName === 'tv-series'">
+                <img [src]="content.imgSource" class="card-img-top">
+                <div class="card-body">
+                    <h3 class="card-title">{{content.title}}</h3>
+                    <div class="row justify-content-end" style="color:lightseagreen;">
+                        <fa-icon [icon]="faStar" style="color: gold;"></fa-icon> <h2>  {{content.rating}} </h2><h5>/10</h5>
+                    </div>
+                    <h4 style="color: #3F51B5;">Who is it for: <span style="color:black;">{{content.whoIsItFor}}</span></h4>
+                    <h4 style="color: #3F51B5;">Description: <span style="color:black;">{{content.description}}</span></h4>
+                </div>
+                <div>
+                    <button mat-button color="primary">Comments</button> |
+                    <button mat-button color="primary" (click)="openDialog(content.id)">Details</button>
+                </div>
+                <div class="card-footer text-muted">
+                   <i>Posten on: {{content.createdAt}}</i> 
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Webinars">
+        <div *ngFor="let content of contents">
+            <div class="card col-3 mt-4 ml-3 mr-3" *ngIf="content.contentTypeName === 'webinar'">
+                <img src="https://ugelcajamarca.gob.pe/wp-content/uploads/sites/3/2020/05/como-hacer-un-webinar-con-e%CC%81xito.png" class="card-img-top">
+                <div class="card-body">
+                    <h3 class="card-title">{{content.title}}</h3>
+                    <div class="row justify-content-end" style="color:lightseagreen;">
+                        <fa-icon [icon]="faStar" style="color: gold;"></fa-icon> <h2>  {{content.rating}} </h2><h5>/10</h5>
+                    </div>
+                    <h4 style="color: #3F51B5;">Who is it for: <span style="color:black;">{{content.whoIsItFor}}</span></h4>
+                    <h4 style="color: #3F51B5;">Description: <span style="color:black;">{{content.description}}</span></h4>
+                </div>
+                <div>
+                    <button mat-button color="primary">Comments</button> |
+                    <button mat-button color="primary" (click)="openDialog(content.id)">Details</button>
+                </div>
+                <div class="card-footer text-muted">
+                   <i>Posten on: {{content.createdAt}}</i> 
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Podcasts">
+        <div *ngFor="let content of contents">
+            <div class="card col-3 mt-4 ml-3 mr-3" *ngIf="content.contentTypeName === 'podcast'">
+                <img src="https://blog.coursify.me/wp-content/uploads/2019/06/sell-online-courses-podcast-coursifyme.jpg" class="card-img-top">
+                <div class="card-body">
+                    <h3 class="card-title">{{content.title}}</h3>
+                    <div class="row justify-content-end" style="color:lightseagreen;">
+                        <fa-icon [icon]="faStar" style="color: gold;"></fa-icon> <h2>  {{content.rating}} </h2><h5>/10</h5>
+                    </div>
+                    <h4 style="color: #3F51B5;">Who is it for: <span style="color:black;">{{content.whoIsItFor}}</span></h4>
+                    <h4 style="color: #3F51B5;">Description: <span style="color:black;">{{content.description}}</span></h4>
+                </div>
+                <div>
+                    <button mat-button color="primary">Comments</button> |
+                    <button mat-button color="primary" (click)="openDialog(content.id)">Details</button>
+                </div>
+                <div class="card-footer text-muted">
+                   <i>Posten on: {{content.createdAt}}</i> 
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Books"> Content 3 </mat-tab>
+    <mat-tab label="Other"> 
+        <div *ngFor="let content of contents">
+            <div class="card col-3 mt-4 ml-3 mr-3" *ngIf="content.contentTypeName === 'other'">
+                <img src="https://vistapointe.net/images/other-wallpaper-11.jpg" class="card-img-top">
+                <div class="card-body">
+                    <h3 class="card-title">{{content.title}}</h3>
+                    <div class="row justify-content-end" style="color:lightseagreen;">
+                        <fa-icon [icon]="faStar" style="color: gold;"></fa-icon> <h2>  {{content.rating}} </h2><h5>/10</h5>
+                    </div>
+                    <h4 style="color: #3F51B5;">Who is it for: <span style="color:black;">{{content.whoIsItFor}}</span></h4>
+                    <h4 style="color: #3F51B5;">Description: <span style="color:black;">{{content.description}}</span></h4>
+                </div>
+                <div>
+                    <button mat-button color="primary">Comments</button> |
+                    <button mat-button color="primary" (click)="openDialog(content.id)">Details</button>
+                </div>
+                <div class="card-footer text-muted">
+                   <i>Posten on: {{content.createdAt}}</i> 
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+  </mat-tab-group>

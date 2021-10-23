@@ -1,0 +1,8 @@
+<nav class="navbar navbar-light navbar-expand-sm" style="background-color: #3F51B5;"> 
+    <ul class = "nav" >
+        <li class="nav-item">
+            <a routerLink="home" routerLinkActive="active" class="nav-link" style="color: white;" >Home</a>
+        </li>
+    </ul>
+    <button mat-button (click)="openDialog()"><mat-icon [matBadge]="notifications.length" matBadgeColor="warn">mail</mat-icon></button>
+</nav>

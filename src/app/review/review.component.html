@@ -1,0 +1,16 @@
+<h3 *ngFor="let review of reviews">
+    {{review.userFullName}}: {{review.comment}}
+    <mat-divider></mat-divider>
+</h3>
+<form (ngSubmit)="onFormSubmitOther(f)" #f="ngForm" class="example-form">
+    <mat-form-field class="example-full-width" style="width: 300px;">              
+        <input type="text" matInput [(ngModel)]="review.comment" name="comment" placeholder="Comment" required>
+      </mat-form-field>
+    <br/>
+   <mat-form-field class="example-full-width" style="width: 300px;">
+      <label>Grade (between 1 and 10):</label>
+      <input type="number" name="grade" min="1" max="10"  matInput [(ngModel)]="review.grade" required>
+    </mat-form-field>
+    <br/>
+    <button  mat-raised-button color="primary" type="submit" [disabled]="!f.form.valid">Add</button>
+</form>

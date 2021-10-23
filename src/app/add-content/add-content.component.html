@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row mt-4 justify-content-center">
+    <mat-form-field appearance="fill" style="width: 300px;">
+      <mat-label>Choose content type</mat-label>
+      <mat-select [(ngModel)]="selectedId" (selectionChange)='onOptionsSelected($event)' name="contentForm">
+        <mat-option *ngFor="let type of contentTypes" [value]="type.id">
+          {{type.typeName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="row mt-4 justify-content-center">
+    <div class="row" *ngIf="selected !== ''">
+      <form (ngSubmit)="onFormSubmitOther()" #f="ngForm" class="example-form">
+        <mat-form-field class="example-full-width" style="width: 300px;">
+          <mat-label>Title</mat-label>
+          <input type="text" matInput [(ngModel)]="content.title" name="title" placeholder="Ex. Friends" required>
+        </mat-form-field>
+        <br />
+        <mat-form-field class="example-full-width" style="width: 300px;">
+          <mat-label>Description</mat-label>
+          <textarea matInput rows="5" cols="40" matInput [(ngModel)]="content.description" name="description"
+            placeholder="Ex. Tv-Series about group of friends"></textarea>
+        </mat-form-field>
+        <br />
+        <mat-form-field class="example-full-width" style="width: 300px;">
+          <mat-label>Who is it for</mat-label>
+          <textarea matInput rows="5" cols="40" [(ngModel)]="content.whoIsItFor" name="whoIsItFor"
+            placeholder="Ex. Anyone that likes sitcoms"></textarea>
+        </mat-form-field>
+        <br />
+        <mat-form-field class="example-full-width" style="width: 300px;">
+          <mat-label>Link</mat-label>
+          <input type="text" matInput [(ngModel)]="content.url" name="url"
+            placeholder="Ex. Link for additional information">
+        </mat-form-field>
+        <br />
+        <mat-form-field class="example-chip-list" style="width: 300px;">
+          <mat-label>Add tags</mat-label>
+          <mat-chip-list #chipList aria-label="Tag selection">
+            <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"
+              (removed)="remove(tag)">
+              {{tag.name}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="New tag..." [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+        </mat-form-field>
+        <div class="d-flex justify-content-end">
+          <button mat-raised-button color="primary" type="submit"
+            *ngIf="selected ==='webinar' || selected === 'podcast' || selected === 'other'"
+            [disabled]="!f.form.valid">Post content</button>
+          <button mat-raised-button color="primary" type="submit"
+            *ngIf="selected ==='movie' || selected === 'tvseries' || selected === 'book'"
+            [disabled]="!f.form.valid">Search by title</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <mat-card class="card border-light col-3 mt-3" style="width: 18rem;" *ngFor="let item of moviesImdb">
+      <mat-card-header>
+        <mat-card-title>{{item.l}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="mt-2">
+        <a (click)="onClick(item.id, item.l, item.i.imageUrl)">
+          <img mat-card-image [src]="item.i.imageUrl" style="max-width: 100%;">
+        </a>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
